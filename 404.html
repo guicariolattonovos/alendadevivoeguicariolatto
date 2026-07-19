@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <title>Portal de Notícias - Gui Cariolatto</title>
     <script type="text/javascript">
-      var pathSegmentsToKeep = 1;
+      var segment = 'alendadevivoeguicariolatto';
       var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      if (l.pathname.indexOf('/' + segment) === 0 && l.pathname.length > segment.length + 1) {
+        // Se estiver em uma sub-rota, redireciona para a raiz da subpasta
+        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/' + segment + '/');
+      } else {
+        // Caso contrário, apenas recarrega o index
+        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/' + segment + '/');
+      }
     </script>
   </head>
   <body>
